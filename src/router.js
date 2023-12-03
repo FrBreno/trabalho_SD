@@ -1,11 +1,10 @@
 const express = require('express');
 const passagensController = require('./controllers/passagensController');
+const bodyMiddleware = require('./middlewares/bodyMiddleware');
 
 const router = express.Router();
 
-router.post('/passagens', (req, res) => {
-  return res.json(req.body);
-});
+router.post('/passagens', bodyMiddleware.validateTicket, passagensController.createPassage);
 
 router.get('/passagens', passagensController.getAll);
 

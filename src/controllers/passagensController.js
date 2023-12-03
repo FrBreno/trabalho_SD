@@ -26,8 +26,26 @@ const createPassage = async (req, res) => {
   return res.status(201).json(newPassage);
 }
 
+const updatePass = async (req, res) => {
+  const { id } = req.params;
+  const passage = req.body;
+
+  const voo = await voosModel.getByID(passage.idVoo);
+  if (voo.length === 0) {
+    return res.status(400).json({ error: 'Voo não encontrado!' });
+  }
+  const passageExists = await passagensModel.getByID(id);
+  if (passageExists.length === 0) {
+    return res.status(404).json({ error: 'Passagem não encontrada!' });
+  }
+
+  await passagensModel.updatePass(passage, id);
+  return res.status(200).json({ message: 'Passagem atualizada com sucesso!' });
+}
+
 module.exports = {
   getAll,
   getByID,
   createPassage,
+  updatePass
 };

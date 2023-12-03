@@ -24,8 +24,18 @@ const createPassage = async (passage) => {
   return newPassage;
 };
 
+const updatePass = async (passage, id) => {
+  const { idVoo, nome, preco, bagagem, primeiraClasse, servicoLuxo } = passage;
+  await connection.execute(
+    'UPDATE passagens SET idVoo = ?, nome = ?, preco = ?, bagagem = ?, primeiraClasse = ?, servicoLuxo = ? WHERE id = ?;',
+    [idVoo, nome, preco, bagagem, primeiraClasse, servicoLuxo, id]
+  );
+  return;
+};
+
 module.exports = {
   getAll,
   getByID,
   createPassage,
+  updatePass
 };

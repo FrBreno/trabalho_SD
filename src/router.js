@@ -10,9 +10,7 @@ router.get('/passagens', passagensController.getAll);
 
 router.get('/passagens/:id', passagensController.getByID);
 
-router.put('/passagens/:id', (req, res) => {
-  return res.json({ id: req.params.id });
-});
+router.put('/passagens/:id', bodyMiddleware.validateTicket, passagensController.updatePass);
 
 router.delete('/passagens/:id', (req, res) => {
   return res.json({ id: req.params.id });

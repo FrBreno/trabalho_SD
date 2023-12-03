@@ -1,4 +1,5 @@
 const express = require('express');
+const voosController = require('./controllers/voosController');
 const passagensController = require('./controllers/passagensController');
 const bodyMiddleware = require('./middlewares/bodyMiddleware');
 
@@ -14,12 +15,8 @@ router.put('/passagens/:id', bodyMiddleware.validateTicket, passagensController.
 
 router.delete('/passagens/:id', passagensController.deletePass);
 
-router.get('/voos', (req, res) => {
-  return res.json({ id: req.params.id });
-});
+router.get('/voos', voosController.getAll);
 
-router.get('/voos/:id', (req, res) => {
-  return res.json({ id: req.params.id });
-});
+router.get('/voos/:id', voosController.getByID);
 
 module.exports = router;

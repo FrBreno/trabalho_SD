@@ -1,10 +1,13 @@
 const express = require('express');
+const passagensController = require('./controllers/passagensController');
 
 const router = express.Router();
 
 router.post('/passagens', (req, res) => {
   return res.json(req.body);
 });
+
+router.get('/passagens', passagensController.getAll);
 
 router.get('/passagens/:id', (req, res) => {
   return res.json({ id: req.params.id });
@@ -18,7 +21,11 @@ router.delete('/passagens/:id', (req, res) => {
   return res.json({ id: req.params.id });
 });
 
-router.get('/voo/:id', (req, res) => {
+router.get('/voos', (req, res) => {
+  return res.json({ id: req.params.id });
+});
+
+router.get('/voos/:id', (req, res) => {
   return res.json({ id: req.params.id });
 });
 

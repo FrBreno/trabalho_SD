@@ -53,10 +53,28 @@ const deletePass = async (req, res) => {
   return res.status(200).json({ message: 'Passagem deletada com sucesso!' });
 }
 
+const transferPass = async (req, res) => {
+  const { id } = req.params;
+  const { nome, bagagem } = req.body;
+
+  const passageExists = await passagensModel.getByID(id);
+  if (passageExists.length === 0) {
+    return res.status(404).json({ error: 'Passagem não encontrada!' });
+  }
+  const passage = {
+    ...passageExists[0],
+    nome,
+    bagagem
+  };
+  await passagensModel.updatePass(passage, id);
+  return res.status(200).json({ message: 'Passagem transferida com sucesso!' });
+}
+
 module.exports = {
   getAll,
   getByID,
   createPassage,
   updatePass,
-  deletePass
+  deletePass,
+  transferPass
 };

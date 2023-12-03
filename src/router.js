@@ -15,6 +15,8 @@ router.put('/passagens/:id', bodyMiddleware.validateTicket, passagensController.
 
 router.delete('/passagens/:id', passagensController.deletePass);
 
+router.put('/transferir/:id', bodyMiddleware.validateTransfer, passagensController.transferPass);
+
 router.get('/voos', voosController.getAll);
 
 router.get('/voos/:id', voosController.getByID);

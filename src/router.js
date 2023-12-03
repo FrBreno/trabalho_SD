@@ -12,9 +12,7 @@ router.get('/passagens/:id', passagensController.getByID);
 
 router.put('/passagens/:id', bodyMiddleware.validateTicket, passagensController.updatePass);
 
-router.delete('/passagens/:id', (req, res) => {
-  return res.json({ id: req.params.id });
-});
+router.delete('/passagens/:id', passagensController.deletePass);
 
 router.get('/voos', (req, res) => {
   return res.json({ id: req.params.id });

@@ -33,9 +33,18 @@ const updatePass = async (passage, id) => {
   return;
 };
 
+const deletePass = async (id) => {
+  await connection.execute(
+    'DELETE FROM passagens WHERE id = ?;',
+    [id]
+  );
+  return
+}
+
 module.exports = {
   getAll,
   getByID,
   createPassage,
-  updatePass
+  updatePass,
+  deletePass
 };

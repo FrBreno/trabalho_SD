@@ -43,9 +43,20 @@ const updatePass = async (req, res) => {
   return res.status(200).json({ message: 'Passagem atualizada com sucesso!' });
 }
 
+const deletePass = async (req, res) => {
+  const { id } = req.params;
+  const passageExists = await passagensModel.getByID(id);
+  if (passageExists.length === 0) {
+    return res.status(404).json({ error: 'Passagem não encontrada!' });
+  }
+  await passagensModel.deletePass(id);
+  return res.status(200).json({ message: 'Passagem deletada com sucesso!' });
+}
+
 module.exports = {
   getAll,
   getByID,
   createPassage,
-  updatePass
+  updatePass,
+  deletePass
 };

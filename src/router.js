@@ -8,9 +8,7 @@ router.post('/passagens', bodyMiddleware.validateTicket, passagensController.cre
 
 router.get('/passagens', passagensController.getAll);
 
-router.get('/passagens/:id', (req, res) => {
-  return res.json({ id: req.params.id });
-});
+router.get('/passagens/:id', passagensController.getByID);
 
 router.put('/passagens/:id', (req, res) => {
   return res.json({ id: req.params.id });

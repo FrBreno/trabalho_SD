@@ -7,6 +7,14 @@ const getAll = async () => {
   return passagens;
 };
 
+const getByID = async (id) => {
+  const [passagem] = await connection.execute(
+    'SELECT * FROM passagens WHERE id = ?;',
+    [id]
+  );
+  return passagem;
+}
+
 const createPassage = async (passage) => {
   const { idVoo, nome, preco, bagagem, primeiraClasse, servicoLuxo } = passage;
   const [newPassage] = await connection.execute(
@@ -18,5 +26,6 @@ const createPassage = async (passage) => {
 
 module.exports = {
   getAll,
+  getByID,
   createPassage,
 };
